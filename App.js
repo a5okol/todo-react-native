@@ -5,11 +5,9 @@ import { MainScreen } from "./src/screens/MainScreen";
 import { TodoScreen } from "./src/screens/TodoScreen";
 
 export default function App() {
-  const [todoId, setTodoId] = useState("2");
+  const [todoId, setTodoId] = useState(null);
   const [todos, setTodos] = useState([
-    { id: "1", title: "Пахать очень плодотворно" },
-    { id: "2", title: "Добится успеха" },
-    { id: "3", title: "Идти на жестких принципах" }
+    // { id: "1", title: "Пахать очень плодотворно" },
   ]); // todos - state, useState - функция, которая позволяет изменить state
 
   const addTodo = title => {
@@ -130,7 +128,7 @@ const styles = StyleSheet.create({
     // height: 30,
     alignItems: "center",
     color: "#fff",
-    justifyContent: "",
+    justifyContent: 'center',
     alignItems: "flex-start",
     justifyContent: "flex-end"
   }

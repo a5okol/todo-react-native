@@ -1,37 +1,62 @@
-import React from 'react'
-import { Stylesheet, View, FlatList } from 'react-native'
-import { AddTodo } from '../components/AddTodo'
-import { Todo } from '../components/Todo'
-
+import React from "react";
+import { StyleSheet, View, FlatList, Image, Text } from "react-native";
+import { AddTodo } from "../components/AddTodo";
+import { Todo } from "../components/Todo";
 
 export const MainScreen = props => {
-    return (
+  let content = (
+    <FlatList // скрол с подгрузкой (более оптимизированный вариант скролинга)
+      keyExtractor={item => item.id.toString()}
+      data={props.todos}
+      renderItem={({ item }) => (
+        <Todo todo={item} onRemove={props.removeTodo} onOpen={props.openTodo} />
+      )}
+      keyExtractor={item => item.id.toString()}
+    />
+  );
+
+  if (props.todos.length === 0) {
+    content = (
+      <View style={styles.imgWrap}>
+        <Image
+          style={styles.image}
+          source={require("../../assets/clipboard.png")}
+          //   source={{
+          //     uri: "https://facebook.github.io/react-native/img/tiny_logo.png"
+          //   }}
+        />
+        <Text style={styles.textWrap}>Enter your first note</Text>
+      </View>
+    );
+  }
+
+  return (
     <View>
-        <AddTodo onSubmit={props.addTodo}/>
-
-            {/* 
-
-            <ScrollView>
-            { todos.map(todo => (
-                <Todo todo={todo} key={todo.id} />
-            ))}
-            </ScrollView> 
-
-            */}
-
-            <FlatList // скрол с подгрузкой (более оптимизированный вариант скролинга)
-                keyExtractor={item => item.id.toString()}
-                data={props.todos}
-                renderItem={({ item }) => (
-                    <Todo 
-                        todo={ item }  
-                        onRemove={props.removeTodo} 
-                        onOpen={props.openTodo} 
-                        />)}
-                        keyExtractor={item => item.id.toString()}
-            />
-
+      <AddTodo onSubmit={props.addTodo} />
+      {content}
     </View>
-)}
+  );
+};
 
-// const styles = Stylesheet.create({})
+const styles = StyleSheet.create({
+  imgWrap: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    height: "80%"
+  },
+  textWrap: {
+    color: "grey",
+    alignItems: "center",
+    // color: "#fff",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "flex-start"
+  },
+  image: {
+    width: 100,
+    height: 100,
+    marginBottom: 8,
+    // resizeMode: 'contain'
+  }
+});

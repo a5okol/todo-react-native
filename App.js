@@ -5,7 +5,7 @@ import { MainScreen } from "./src/screens/MainScreen";
 import { TodoScreen } from "./src/screens/TodoScreen";
 
 export default function App() {
-  const [todoId, setTodoId] = useState('2');
+  const [todoId, setTodoId] = useState("2");
   const [todos, setTodos] = useState([
     { id: "1", title: "Пахать очень плодотворно" },
     { id: "2", title: "Добится успеха" },
@@ -36,6 +36,17 @@ export default function App() {
     ]);
   };
 
+  const updateTodo = (id, title) => {
+    setTodos(prev =>
+      prev.map(todo => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+        return todo;
+      })
+    );
+  };
+
   const removeTodo = id => {
     const todo = todos.find(t => t.id === id);
     Alert.alert(
@@ -50,7 +61,7 @@ export default function App() {
           text: "Delete",
           style: "destructive",
           onPress: () => {
-            setTodoId(null)
+            setTodoId(null);
             setTodos(prev => prev.filter(todo => todo.id !== id));
           }
         }
@@ -78,6 +89,7 @@ export default function App() {
         goBack={() => setTodoId(null)}
         todo={selectedTodo}
         onRemove={removeTodo}
+        onSave={updateTodo}
       />
     );
   }

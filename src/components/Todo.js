@@ -10,7 +10,7 @@ export const Todo = props => {
     return (
     <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => console.log('Prassead', props.todo.id) + props.onOpen(props.todo.id)}
+        onPress={() => props.onOpen(props.todo.id)}
 
         // onLongPress={() => props.onRemove(props.todo.id)} // 1. Найболее распространный вариант вызова функции
         // onLongPress={longPressHandler} // 2. Менее популярный вариант.

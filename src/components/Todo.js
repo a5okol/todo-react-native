@@ -15,7 +15,7 @@ export const Todo = props => {
       onLongPress={props.onRemove.bind(null, props.todo.id)} // 3. Метод bind вернет нам функцию
     >
       <View style={styles.todo}>
-        <Text>{props.todo.title}</Text>
+        <Text style={styles.title}>{props.todo.title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -39,5 +39,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { width: 1, height: 1 },
     elevation: 4 // shadow for android
+  },
+  title: {
+      fontFamily: 'roboto-bold'
   }
 });

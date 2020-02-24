@@ -34,16 +34,9 @@ export const AddTodo = props => {
         // autoCorrect={false} // убираем авто-имправление
         // autoCapitalize='none' // убираем заглавную с большой
       />
-      {/* <View style={styles.addButtom}>
-        <Button
-          style={{ color: "white", backgroundColor: "white" }}
-          title="Add"
-          onPress={pressHandler}
-        ></Button>
-      </View> */}
 
       <View style={styles.addButtom}>
-        <TouchableOpacity activeOpacity={0.5} onPress={pressHandler}>
+        <TouchableOpacity activeOpacity={0.7} onPress={pressHandler}>
           <Image
             source={require("../../assets/add.png")}
             style={styles.addImageButtom}
@@ -59,11 +52,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 5,
     marginTop: -10,
   },
   input: {
-    width: "74%",
+    width: "75%",
     borderStyle: "solid",
     borderBottomWidth: 2,
     borderColor: THEME.MAIN_COLOR,
@@ -71,6 +64,11 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     padding: 10,
     height: 55,
+    shadowColor: "#000",
+    shadowRadius: 1,
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 1, height: 1 },
+    elevation: 2 // shadow for android
   },
 //   addButtom: {
 //     // backgroundColor: THEME.MAIN_COLOR,

@@ -8,11 +8,11 @@ import { TodoScreen } from "./screens/TodoScreen";
 import { TodoContext } from "./context/todo/todoContext";
 
 export const MainLayout = () => {
-  const todoContext = useContext(TodoContext);
+  const {todos, addTodo, removeTodo, updateTodo} = useContext(TodoContext);
   const [todoId, setTodoId] = useState(null);
-  const [todos, setTodos] = useState([]); // todos - state, useState - функция, которая позволяет изменить state
+//   const [todos, setTodos] = useState([]); // todos - state, useState - функция, которая позволяет изменить state
 
-  const addTodo = title => {
+//   const addTodo = title => {
     // const newTodo = {
     //   id: Date.now().toString(),
     //   title: title
@@ -27,52 +27,52 @@ export const MainLayout = () => {
     // })
 
     // Более короткий вариант того, что выше:
-    setTodos(prev => [
-      ...prev,
-      {
-        id: Date.now().toString(),
-        title
-      }
-    ]);
-  };
+//     setTodos(prev => [
+//       ...prev,
+//       {
+//         id: Date.now().toString(),
+//         title
+//       }
+//     ]);
+//   };
 
-  const updateTodo = (id, title) => {
-    setTodos(prev =>
-      prev.map(todo => {
-        if (todo.id === id) {
-          todo.title = title;
-        }
-        return todo;
-      })
-    );
-  };
+//   const updateTodo = (id, title) => {
+//     setTodos(prev =>
+//       prev.map(todo => {
+//         if (todo.id === id) {
+//           todo.title = title;
+//         }
+//         return todo;
+//       })
+//     );
+//   };
 
-  const removeTodo = id => {
-    const todo = todos.find(t => t.id === id);
-    Alert.alert(
-      "Delete item",
-      `Are you sure you want to delete "${todo.title}"?`,
-      [
-        {
-          text: "Cancel",
-          style: "cancel"
-        },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            setTodoId(null);
-            setTodos(prev => prev.filter(todo => todo.id !== id));
-          }
-        }
-      ],
-      { cancelable: false }
-    );
-  };
+//   const removeTodo = id => {
+//     const todo = todos.find(t => t.id === id);
+//     Alert.alert(
+//       "Delete item",
+//       `Are you sure you want to delete "${todo.title}"?`,
+//       [
+//         {
+//           text: "Cancel",
+//           style: "cancel"
+//         },
+//         {
+//           text: "Delete",
+//           style: "destructive",
+//           onPress: () => {
+//             setTodoId(null);
+//             setTodos(prev => prev.filter(todo => todo.id !== id));
+//           }
+//         }
+//       ],
+//       { cancelable: false }
+//     );
+//   };
 
   let content = (
     <MainScreen
-      todos={todoContext.todos}
+      todos={todos}
       addTodo={addTodo}
       removeTodo={removeTodo}
       openTodo={id => {

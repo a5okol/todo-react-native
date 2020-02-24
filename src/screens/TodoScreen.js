@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Button } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { AntDesign, Foundation, Feather } from "@expo/vector-icons";
 
 import { THEME } from "../theme";
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     color: THEME.MAIN_COLOR,
   },
   button: {
-    width: "40%",
+    width: Dimensions.get('window').width / 3,
+    width: Dimensions.get('window').width > 400 ? 150 : 100,
     justifyContent: "center",
     alignItems: "center"
   },

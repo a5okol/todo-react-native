@@ -6,46 +6,11 @@ import { THEME } from "./theme";
 import { MainScreen } from "./screens/MainScreen";
 import { TodoScreen } from "./screens/TodoScreen";
 import { TodoContext } from "./context/todo/todoContext";
+import { ScreenContext } from "./context/screen/screenContext";
 
 export const MainLayout = () => {
   const {todos, addTodo, removeTodo, updateTodo} = useContext(TodoContext);
-  const [todoId, setTodoId] = useState(null);
-//   const [todos, setTodos] = useState([]); // todos - state, useState - функция, которая позволяет изменить state
-
-//   const addTodo = title => {
-    // const newTodo = {
-    //   id: Date.now().toString(),
-    //   title: title
-    // }
-
-    // // setTodos(todos.concat([ newTodo ]))
-    // setTodos((prevTodos) => {
-    //   return [
-    //     ...prevTodos, // ...prevTodos - с помощью оператора спред (...) разварачиваем предодущий стейт, получая скланированный предодущий state
-    //     newTodo
-    //   ]
-    // })
-
-    // Более короткий вариант того, что выше:
-//     setTodos(prev => [
-//       ...prev,
-//       {
-//         id: Date.now().toString(),
-//         title
-//       }
-//     ]);
-//   };
-
-//   const updateTodo = (id, title) => {
-//     setTodos(prev =>
-//       prev.map(todo => {
-//         if (todo.id === id) {
-//           todo.title = title;
-//         }
-//         return todo;
-//       })
-//     );
-//   };
+  const {todoId, changeScreen} = useContext(ScreenContext)
 
 //   const removeTodo = id => {
 //     const todo = todos.find(t => t.id === id);
@@ -75,10 +40,10 @@ export const MainLayout = () => {
       todos={todos}
       addTodo={addTodo}
       removeTodo={removeTodo}
-      openTodo={id => {
-        setTodoId(id);
-      }}
-      // openTodo={setTodoId} // второй вариант
+      openTodo={changeScreen} 
+      // openTodo={id => {
+      //   setTodoId(id);
+      // }} // второй вариант
     />
   );
 
@@ -86,7 +51,7 @@ export const MainLayout = () => {
     const selectedTodo = todos.find(todo => todo.id === todoId);
     content = (
       <TodoScreen
-        goBack={() => setTodoId(null)}
+        goBack={() => changeScreen(null)}
         todo={selectedTodo}
         onRemove={removeTodo}
         onSave={updateTodo}

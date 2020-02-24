@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
     elevation: 4 // shadow for android
   },
   title: {
-      fontFamily: 'roboto-bold'
+    //   fontFamily: 'roboto-bold'
   }
 });

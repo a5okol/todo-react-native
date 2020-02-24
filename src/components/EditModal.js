@@ -8,6 +8,7 @@ import {
   Alert
 } from "react-native";
 import { THEME } from "../theme";
+import { AppButton } from "./ui/AppButton";
 
 export const EditModal = ({ visible, onCancel, value, onSave }) => {
   const [title, setTitlse] = useState(value);
@@ -15,7 +16,7 @@ export const EditModal = ({ visible, onCancel, value, onSave }) => {
   const saveHandler = () => {
     if (title.trim().length < 3) {
       Alert.alert(
-        'Error! ',
+        "Error! ",
         `You need to enter more than 3 symbols. Now is ${
           title.trim().length
         } symbol.`
@@ -38,12 +39,12 @@ export const EditModal = ({ visible, onCancel, value, onSave }) => {
           maxLength={500}
         />
         <View style={styles.buttons}>
-          <Button
-            title="Cancel"
-            onPress={onCancel}
-            color={THEME.DANGER_COLOR}
-          />
-          <Button title="Save" onPress={saveHandler} />
+          <AppButton onPress={onCancel} color={THEME.MAIN_COLOR}>
+            Cancel
+          </AppButton>
+          <AppButton onPress={saveHandler} color={'#5da266'}>
+            Save
+          </AppButton>
         </View>
       </View>
     </Modal>

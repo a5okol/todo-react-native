@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   TextInput,
-  Button,
   Alert,
   Image,
   TouchableOpacity
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 5,
-    marginTop: -10,
+    marginTop: -10
   },
   input: {
     width: "75%",
@@ -70,20 +68,20 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     elevation: 2 // shadow for android
   },
-//   addButtom: {
-//     // backgroundColor: THEME.MAIN_COLOR,
-//     width: "20%",
-//     // marginLeft: -30,
-//     height: 40
-//     // color: "#000",
-//     // fontSize: 222,
-//     // borderColor: THEME.MAIN_COLOR,
-//     // borderRadius: 4
-//   },
+  //   addButtom: {
+  //     // backgroundColor: THEME.MAIN_COLOR,
+  //     width: "20%",
+  //     // marginLeft: -30,
+  //     height: 40
+  //     // color: "#000",
+  //     // fontSize: 222,
+  //     // borderColor: THEME.MAIN_COLOR,
+  //     // borderRadius: 4
+  //   },
   addImageButtom: {
     width: 100,
     // marginTop: -10,
     height: 90,
-    resizeMode: 'contain'
+    resizeMode: "contain"
   }
 });

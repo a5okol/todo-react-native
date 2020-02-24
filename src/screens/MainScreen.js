@@ -21,9 +21,6 @@ export const MainScreen = props => {
         <Image
           style={styles.image}
           source={require("../../assets/clipboard.png")}
-          //   source={{
-          //     uri: "https://facebook.github.io/react-native/img/tiny_logo.png"
-          //   }}
         />
         <Text style={styles.textWrap}>Enter your first note</Text>
       </View>
@@ -47,9 +44,7 @@ const styles = StyleSheet.create({
   },
   textWrap: {
     color: "grey",
-    alignItems: "center",
     // color: "#fff",
-    justifyContent: "center",
     alignItems: "flex-start",
     justifyContent: "flex-start"
   },

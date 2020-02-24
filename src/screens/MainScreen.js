@@ -1,18 +1,50 @@
-import React from "react";
-import { StyleSheet, View, FlatList, Image, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Image,
+  Text,
+  Dimensions
+} from "react-native";
 import { AddTodo } from "../components/AddTodo";
 import { Todo } from "../components/Todo";
+import { THEME } from "../theme";
 
 export const MainScreen = props => {
+  const [deviceWidth, setdeviceWidth] = useState(
+    Dimensions.get("window").width - THEME.PADDING_HORIZONTAL * 2
+  );
+
+  useEffect(() => {
+    const update = () => {
+      const width =
+        Dimensions.get("window").width - THEME.PADDING_HORIZONTAL * 2;
+      setdeviceWidth(width);
+    };
+
+    Dimensions.addEventListener("change", update);
+
+    return () => {
+      Dimensions.removeEventListener("change", update);
+    }
+  });
+
   let content = (
-    <FlatList // скрол с подгрузкой (более оптимизированный вариант скролинга)
-      keyExtractor={item => item.id.toString()}
-      data={props.todos}
-      renderItem={({ item }) => (
-        <Todo todo={item} onRemove={props.removeTodo} onOpen={props.openTodo} />
-      )}
-      keyExtractor={item => item.id.toString()}
-    />
+    <View style={{ width: deviceWidth }}>
+      <FlatList // скрол с подгрузкой (более оптимизированный вариант скролинга)
+        keyExtractor={item => item.id.toString()}
+        data={props.todos}
+        renderItem={({ item }) => (
+          <Todo
+            todo={item}
+            onRemove={props.removeTodo}
+            onOpen={props.openTodo}
+          />
+        )}
+        keyExtractor={item => item.id.toString()}
+      />
+    </View>
   );
 
   if (props.todos.length === 0) {
@@ -44,14 +76,13 @@ const styles = StyleSheet.create({
   },
   textWrap: {
     color: "grey",
-    // color: "#fff",
     alignItems: "flex-start",
     justifyContent: "flex-start"
   },
   image: {
     width: 100,
     height: 100,
-    marginBottom: 8,
+    marginBottom: 8
     // resizeMode: 'contain'
   }
 });

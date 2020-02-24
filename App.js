@@ -6,6 +6,7 @@ import { AppLoading } from "expo";
 import { Navbar } from "./src/components/Navbar";
 import { MainScreen } from "./src/screens/MainScreen";
 import { TodoScreen } from "./src/screens/TodoScreen";
+import { THEME } from "./src/theme";
 
 async function loadApplication() {
   await Font.loadAsync({
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, // тут мы говорим, чтобы блок занимал всю доступную ширину экрана
     backgroundColor: "white",
-    paddingHorizontal: 20,
+    paddingHorizontal: THEME.PADDING_HORIZONTAL,
     paddingVertical: 20
   },
   seconBlock: {

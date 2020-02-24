@@ -5,7 +5,8 @@ import {
   TextInput,
   Alert,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Keyboard
 } from "react-native";
 import { THEME } from "../theme";
 
@@ -16,6 +17,7 @@ export const AddTodo = props => {
     if (value.trim()) {
       props.onSubmit(value);
       setValue("");
+      Keyboard.dismiss() // скрываем клавиатуру после добавления заметки
     } else {
       Alert.alert("Input can't be empty!");
     }

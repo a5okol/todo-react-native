@@ -8,7 +8,8 @@ import {
   REMOVE_TODO,
   UPDATE_TODO,
   SHOW_LOADER,
-  SHOW_ERROR
+  SHOW_ERROR,
+  FETCH_TODOS
 } from "./types";
 import { ScreenContext } from "../screen/screenContext";
 
@@ -32,7 +33,7 @@ export const TodoState = ({ children }) => {
       }
     );
 
-    const data = await response.json(); //
+    const data = await response.json(); // .json() нужен для того, чтобы распарсить данные
     dispatch({ type: ADD_TODO, title, id: data.name });
   };
 
@@ -60,6 +61,27 @@ export const TodoState = ({ children }) => {
     );
   };
 
+  const fetchTodos = async () => {
+    const response = await fetch(
+      "https://rn-todo-application.firebaseio.com/todos.json",
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      }
+    );
+    const data = await response.json();
+    console.log("Data GET:", data);
+    const todos = Object.keys(data).map(key => ({ ...data[key], id: key }));
+    // (data) - это объект, Object.keys - функция
+    // Object.keys(data) возвращаем тут массив ключей и через .map преобразовываем массив
+    // (key ) - на каждой итерации получаем ключ объекта data
+    // ({ }) - фигурные скобки тут нужны для того, чобы {} не считалось телом функции.
+    // ...data[key], - это объект вида: { "title": "Ds", } (из БД)
+    // id: key - добавляем поле id, который будет приравниватся key
+    
+    dispatch({ type: FETCH_TODOS, todos });
+  };
+
   const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title });
 
   const showLoader = () => dispatch({ type: SHOW_LOADER });
@@ -74,9 +96,12 @@ export const TodoState = ({ children }) => {
     <TodoContext.Provider
       value={{
         todos: state.todos,
+        loading: state.loading,
+        error: state.error,
         addTodo,
         removeTodo,
-        updateTodo
+        updateTodo,
+        fetchTodos
       }}
     >
       {children}

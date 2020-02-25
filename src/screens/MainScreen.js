@@ -65,7 +65,7 @@ export const MainScreen = () => {
       <View style={styles.imgWrap}>
         <Image
           style={styles.image}
-          source={require("../../assets/clipboard.png")}
+          source={require("../../assets/list.png")}
         />
         <Text style={styles.textWrap}>Enter your first note</Text>
       </View>
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    marginBottom: 8
     // resizeMode: 'contain'
   }
 });

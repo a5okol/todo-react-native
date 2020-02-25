@@ -38,7 +38,7 @@ export const AddTodo = props => {
       <View style={styles.addButtom}>
         <TouchableOpacity activeOpacity={0.7} onPress={pressHandler}>
           <Image
-            source={require("../../assets/add.png")}
+            source={require("../../assets/add2.png")}
             style={styles.addImageButtom}
           />
         </TouchableOpacity>
@@ -56,17 +56,17 @@ const styles = StyleSheet.create({
     marginTop: -10
   },
   input: {
-    width: "75%",
+    width: "77%",
     borderStyle: "solid",
     borderBottomWidth: 2,
     borderColor: THEME.MAIN_COLOR,
-    backgroundColor: "#ececec",
+    backgroundColor: "#fff",
     borderRadius: 2,
     padding: 10,
     height: 55,
     shadowColor: "#000",
     shadowRadius: 1,
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.3,
     shadowOffset: { width: 1, height: 1 },
     elevation: 2 // shadow for android
   },
@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
   //     // borderRadius: 4
   //   },
   addImageButtom: {
-    width: 100,
+    width: 70,
     // marginTop: -10,
-    height: 90,
+    height: 70,
     resizeMode: "contain"
   }
 });

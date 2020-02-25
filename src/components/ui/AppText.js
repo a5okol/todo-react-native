@@ -7,6 +7,6 @@ export const AppText = props => (
 
 const styles = StyleSheet.create({
   default: {
-    fontFamily: "roboto-regular"
+    fontFamily: "tomorrow-regular"
   }
 });

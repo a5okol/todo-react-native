@@ -10,6 +10,7 @@ import {
   SHOW_LOADER,
   HIDE_LOADER,
   SHOW_ERROR,
+  CLEAR_ERROR,
   FETCH_TODOS
 } from "./types";
 import { ScreenContext } from "../screen/screenContext";
@@ -64,25 +65,32 @@ export const TodoState = ({ children }) => {
 
   const fetchTodos = async () => {
     showLoader();
-    const response = await fetch(
-      "https://rn-todo-application.firebaseio.com/todos.json",
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
-      }
-    );
-    const data = await response.json();
-    // console.log("Data GET:", data);
-    const todos = Object.keys(data).map(key => ({ ...data[key], id: key }));
-    // (data) - это объект, Object.keys - функция
-    // Object.keys(data) возвращаем тут массив ключей и через .map преобразовываем массив
-    // (key ) - на каждой итерации получаем ключ объекта data
-    // ({ }) - фигурные скобки тут нужны для того, чобы {} не считалось телом функции.
-    // ...data[key], - это объект вида: { "title": "Ds", } (из БД)
-    // id: key - добавляем поле id, который будет приравниватся key
+    clearError();
+    try {
+      const response = await fetch(
+        "https://rn-todo-application.firebaseio.com/todos.json",
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" }
+        }
+      );
+      const data = await response.json();
+      // console.log("Data GET:", data);
+      const todos = Object.keys(data).map(key => ({ ...data[key], id: key }));
+      // (data) - это объект, Object.keys - функция
+      // Object.keys(data) возвращаем тут массив ключей и через .map преобразовываем массив
+      // (key ) - на каждой итерации получаем ключ объекта data
+      // ({ }) - фигурные скобки тут нужны для того, чобы {} не считалось телом функции.
+      // ...data[key], - это объект вида: { "title": "Ds", } (из БД)
+      // id: key - добавляем поле id, который будет приравниватся key
 
-    dispatch({ type: FETCH_TODOS, todos });
-    hideLoader();
+      dispatch({ type: FETCH_TODOS, todos });
+    } catch (e) {
+      showError("Что-то пошло не так...");
+      console.log(e);
+    } finally {
+      hideLoader();
+    }
   };
 
   const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title });

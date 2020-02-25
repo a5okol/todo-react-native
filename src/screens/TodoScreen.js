@@ -51,10 +51,11 @@ export const TodoScreen = () => {
             Back
           </AntDesign.Button>
         </View>
+      
         <View style={styles.button}>
           <Foundation.Button
             name="page-delete"
-            style={styles.backButtom}
+            style={styles.deleteButtom}
             color={THEME.DANGER_COLOR}
             onPress={() => removeTodo(todo.id)}
           >
@@ -82,14 +83,24 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width / 3,
     width: Dimensions.get("window").width > 400 ? 150 : 100,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   title: {
     fontSize: 22,
-    width: "84%"
+    width: "83%"
   },
   backButtom: {
+    backgroundColor: 'white',
+    paddingLeft: 10,
+    paddingRight: 10,
+    fontFamily: "tomorrow-regular",
+    color: '#fff',
+  },
+  deleteButtom: {
     backgroundColor: "white",
+    fontFamily: "tomorrow-regular",
+    paddingLeft: 10,
+    paddingRight: 10,
     color: THEME.GREY_COLOR
   }
 });

@@ -7,6 +7,6 @@ export const AppTextBold = props => (
 
 const styles = StyleSheet.create({
   default: {
-    fontFamily: "roboto-bold"
+    fontFamily: "tomorrow-bold"
   }
 });

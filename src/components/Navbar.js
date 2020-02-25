@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
 import { THEME } from "../theme";
+import { AppText } from "./ui/AppText";
 
 export const Navbar = props => {
   return (
@@ -13,7 +14,7 @@ export const Navbar = props => {
         })
       }}
     >
-      <Text style={styles.text}>{props.title}</Text>
+      <AppText style={styles.text}>{props.title}</AppText>
     </View>
   );
 };
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: THEME.MAIN_COLOR
   },
   text: {
-    color: Platform.OS === "ios" ? 'white':  THEME.MAIN_COLOR,
+    color: Platform.OS === "ios" ? THEME.SECOND_MAIN_COLOR :  THEME.MAIN_COLOR,
     fontWeight: "600",
     fontSize: 20,
     shadowColor: "#000",

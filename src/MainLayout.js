@@ -23,7 +23,7 @@ export const MainLayout = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1, // тут мы говорим, чтобы блок занимал всю доступную ширину экрана
-    backgroundColor: "white",
+    backgroundColor: "#f1f1f1",
     paddingHorizontal: THEME.PADDING_HORIZONTAL,
     paddingVertical: 20,
     // alignItems: "center",

@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     shadowColor: "#000",
-    shadowRadius: 2,
+    shadowRadius: 1,
     shadowOpacity: 0.3,
-    shadowOffset: { width: 2, height: 2 },
+    shadowOffset: { width: 1, height: 1 },
     elevation: 7, // shadow for android
     backgroundColor: "#fff",
     borderRadius: 3

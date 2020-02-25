@@ -8,8 +8,8 @@ import { MainLayout } from "./src/MainLayout";
 
 async function loadApplication() {
   await Font.loadAsync({
-    "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
-    "roboto-bold": require("./assets/fonts/Roboto-Bold.ttf")
+    "tomorrow-regular": require("./assets/fonts/Tomorrow-Regular.ttf"),
+    "tomorrow-bold": require("./assets/fonts/Tomorrow-Bold.ttf")
   });
 }
 

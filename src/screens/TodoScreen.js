@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, View, Dimensions } from "react-native";
 import { AntDesign, Foundation, Feather } from "@expo/vector-icons";
 
@@ -7,12 +7,18 @@ import { AppCard } from "../components/ui/AppCard";
 import { EditModal } from "../components/EditModal";
 import { AppText } from "../components/ui/AppText";
 import { AppButton } from "../components/ui/AppButton";
+import { TodoContext } from "../context/todo/todoContext";
+import { ScreenContext } from "../context/screen/screenContext";
 
-export const TodoScreen = ({ todo, onRemove, goBack, onSave }) => {
+export const TodoScreen = () => {
+  const { todos, updateTodo, removeTodo } = useContext(TodoContext);
+  const { todoId, changeScreen } = useContext(ScreenContext);
   const [modal, setModal] = useState(false);
 
+  const todo = todos.find(t => t.id === todoId);
+
   const saveHandler = title => {
-    onSave(todo.id, title);
+    updateTodo(todo.id, title);
     setModal(false);
   };
 
@@ -27,7 +33,10 @@ export const TodoScreen = ({ todo, onRemove, goBack, onSave }) => {
 
       <AppCard styles={styles.card}>
         <AppText style={styles.title}>{todo.title}</AppText>
-        <AppButton onPress={() => setModal(true)} style={{backgroundColor: 'white'}}>
+        <AppButton
+          onPress={() => setModal(true)}
+          style={{ backgroundColor: "white" }}
+        >
           <Feather style={styles.editButtom} name="edit" size={25} />
         </AppButton>
       </AppCard>
@@ -37,7 +46,7 @@ export const TodoScreen = ({ todo, onRemove, goBack, onSave }) => {
             name="back"
             style={styles.backButtom}
             color={THEME.GREY_COLOR}
-            onPress={goBack}
+            onPress={() => changeScreen(null)}
           >
             Back
           </AntDesign.Button>
@@ -47,7 +56,7 @@ export const TodoScreen = ({ todo, onRemove, goBack, onSave }) => {
             name="page-delete"
             style={styles.backButtom}
             color={THEME.DANGER_COLOR}
-            onPress={() => onRemove(todo.id)}
+            onPress={() => removeTodo(todo.id)}
           >
             Delete
           </Foundation.Button>
@@ -67,17 +76,17 @@ const styles = StyleSheet.create({
     padding: 15
   },
   editButtom: {
-    color: THEME.MAIN_COLOR,
+    color: THEME.MAIN_COLOR
   },
   button: {
-    width: Dimensions.get('window').width / 3,
-    width: Dimensions.get('window').width > 400 ? 150 : 100,
+    width: Dimensions.get("window").width / 3,
+    width: Dimensions.get("window").width > 400 ? 150 : 100,
     justifyContent: "center",
     alignItems: "center"
   },
   title: {
     fontSize: 22,
-    width: '84%'
+    width: "84%"
   },
   backButtom: {
     backgroundColor: "white",

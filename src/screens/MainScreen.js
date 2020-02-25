@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -10,8 +10,12 @@ import {
 import { AddTodo } from "../components/AddTodo";
 import { Todo } from "../components/Todo";
 import { THEME } from "../theme";
+import { TodoContext } from "../context/todo/todoContext";
+import { ScreenContext } from "../context/screen/screenContext";
 
-export const MainScreen = props => {
+export const MainScreen = () => {
+  const { addTodo, todos, removeTodo } = useContext(TodoContext);
+  const { changeScreen } = useContext(ScreenContext);
   const [deviceWidth, setdeviceWidth] = useState(
     Dimensions.get("window").width - THEME.PADDING_HORIZONTAL * 2
   );
@@ -27,19 +31,19 @@ export const MainScreen = props => {
 
     return () => {
       Dimensions.removeEventListener("change", update);
-    }
+    };
   });
 
   let content = (
     <View style={{ width: deviceWidth }}>
       <FlatList // скрол с подгрузкой (более оптимизированный вариант скролинга)
         keyExtractor={item => item.id.toString()}
-        data={props.todos}
+        data={todos}
         renderItem={({ item }) => (
           <Todo
             todo={item}
-            onRemove={props.removeTodo}
-            onOpen={props.openTodo}
+            onRemove={removeTodo}
+            onOpen={changeScreen}
           />
         )}
         keyExtractor={item => item.id.toString()}
@@ -47,7 +51,7 @@ export const MainScreen = props => {
     </View>
   );
 
-  if (props.todos.length === 0) {
+  if (todos.length === 0) {
     content = (
       <View style={styles.imgWrap}>
         <Image
@@ -61,7 +65,7 @@ export const MainScreen = props => {
 
   return (
     <View>
-      <AddTodo onSubmit={props.addTodo} />
+      <AddTodo onSubmit={addTodo} />
       {content}
     </View>
   );

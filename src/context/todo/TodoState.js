@@ -8,6 +8,7 @@ import {
   REMOVE_TODO,
   UPDATE_TODO,
   SHOW_LOADER,
+  HIDE_LOADER,
   SHOW_ERROR,
   FETCH_TODOS
 } from "./types";
@@ -62,6 +63,7 @@ export const TodoState = ({ children }) => {
   };
 
   const fetchTodos = async () => {
+    showLoader();
     const response = await fetch(
       "https://rn-todo-application.firebaseio.com/todos.json",
       {
@@ -70,7 +72,7 @@ export const TodoState = ({ children }) => {
       }
     );
     const data = await response.json();
-    console.log("Data GET:", data);
+    // console.log("Data GET:", data);
     const todos = Object.keys(data).map(key => ({ ...data[key], id: key }));
     // (data) - это объект, Object.keys - функция
     // Object.keys(data) возвращаем тут массив ключей и через .map преобразовываем массив
@@ -78,8 +80,9 @@ export const TodoState = ({ children }) => {
     // ({ }) - фигурные скобки тут нужны для того, чобы {} не считалось телом функции.
     // ...data[key], - это объект вида: { "title": "Ds", } (из БД)
     // id: key - добавляем поле id, который будет приравниватся key
-    
+
     dispatch({ type: FETCH_TODOS, todos });
+    hideLoader();
   };
 
   const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title });

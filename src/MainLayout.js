@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import React, { useContext } from "react";
+import { View, StyleSheet } from "react-native";
 
 import { Navbar } from "./components/Navbar";
 import { THEME } from "./theme";
@@ -11,7 +11,7 @@ export const MainLayout = () => {
   const { todoId } = useContext(ScreenContext);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.wrapper}>
       <Navbar title="Todo Application" />
       <View style={styles.container}>
         {todoId ? <TodoScreen /> : <MainScreen />}
@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     flex: 1, // тут мы говорим, чтобы блок занимал всю доступную ширину экрана
     backgroundColor: "white",
     paddingHorizontal: THEME.PADDING_HORIZONTAL,
-    paddingVertical: 20
+    paddingVertical: 20,
+    // alignItems: "center",
+    // justifyContent: "center",
+  },
+  wrapper: {
+    flex: 1
   }
 });

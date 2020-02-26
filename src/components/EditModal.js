@@ -40,7 +40,7 @@ export const EditModal = ({ visible, onCancel, value, onSave }) => {
           <AppButton onPress={cancelHandler} color={THEME.MAIN_COLOR}>
             Cancel
           </AppButton>
-          <AppButton onPress={saveHandler} color={"#5da266"}>
+          <AppButton onPress={saveHandler} color={THEME.SECOND_MAIN_COLOR}>
             Save
           </AppButton>
         </View>

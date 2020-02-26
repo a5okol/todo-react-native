@@ -27,8 +27,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   },
   navbarAndroid: {
-    borderBottomColor: THEME.MAIN_COLOR,
-    borderBottomWidth: 1
+    backgroundColor: THEME.SECOND_MAIN_COLOR,
   },
   navbarIOS: {
     backgroundColor: THEME.MAIN_COLOR

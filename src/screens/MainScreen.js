@@ -13,6 +13,8 @@ import { THEME } from "../theme";
 import { TodoContext } from "../context/todo/todoContext";
 import { ScreenContext } from "../context/screen/screenContext";
 import { AppLoader } from "../components/ui/AppLoader";
+import { AppText } from "../components/ui/AppText";
+import { AppButton } from "../components/ui/AppButton";
 
 export const MainScreen = () => {
   const { addTodo, todos, removeTodo, fetchTodos, loading, error } = useContext(
@@ -47,6 +49,18 @@ export const MainScreen = () => {
     return <AppLoader />;
   }
 
+  if (error) {
+    return (
+      <View style={styles.center}>
+        <AppText style={styles.error}>{error}</AppText>
+        <AppButton style={styles.reloadButtom} onPress={loadTodos}>
+          {" "}
+          Reload app
+        </AppButton>
+      </View>
+    );
+  }
+
   let content = (
     <View style={{ width: deviceWidth }}>
       <FlatList // скрол с подгрузкой (более оптимизированный вариант скролинга)
@@ -63,10 +77,7 @@ export const MainScreen = () => {
   if (todos.length === 0) {
     content = (
       <View style={styles.imgWrap}>
-        <Image
-          style={styles.image}
-          source={require("../../assets/list.png")}
-        />
+        <Image style={styles.image} source={require("../../assets/list.png")} />
         <Text style={styles.textWrap}>Enter your first note</Text>
       </View>
     );
@@ -94,7 +105,20 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 100,
-    height: 100,
+    height: 100
     // resizeMode: 'contain'
+  },
+  error: {
+    fontSize: 20,
+    color: THEME.GREY_COLOR,
+    textAlign: "center"
+  },
+  center: {
+    justifyContent: "center",
+    flex: 1,
+    alignItems: "center"
+  },
+  reloadButtom: {
+    marginTop: 10
   }
 });

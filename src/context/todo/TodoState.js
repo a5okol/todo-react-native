@@ -86,7 +86,7 @@ export const TodoState = ({ children }) => {
 
       dispatch({ type: FETCH_TODOS, todos });
     } catch (e) {
-      showError("Что-то пошло не так...");
+      showError("Something went wrong .. Try to restart app!");
       console.log(e);
     } finally {
       hideLoader();

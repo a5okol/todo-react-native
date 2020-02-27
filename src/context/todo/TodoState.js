@@ -93,8 +93,24 @@ export const TodoState = ({ children }) => {
     }
   };
 
-  const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title });
-
+  const updateTodo = async (id, title) => {
+    try {
+      await fetch(
+        `https://rn-todo-application.firebaseio.com/todos/${id}.json`,
+        {
+          method: "PATCH", // PATCH - изменяет часть элементов. Еще есть PUT, который  изменяет весь объект
+          headers: { "Content-Type": "application/json" },
+          body: await JSON.stringify({ title })
+        }
+      );
+      dispatch({ type: UPDATE_TODO, id, title });
+    } catch {
+      showError("Something went wrong .. Try to restart app!");
+      console.log(e);
+    } finally {
+      hideLoader();
+    }
+  };
   const showLoader = () => dispatch({ type: SHOW_LOADER });
 
   const hideLoader = () => dispatch({ type: HIDE_LOADER });
